@@ -65,18 +65,26 @@ class Player {
     public function showdown($game_state) {
     }
 
+    private function preFlopCardStrength($game_state)
+    {
+        $cards = $this->me($game_state)["hole_cards"];
+        $smallCards = ["2", "3", "4", "5", "6", "7", "8"];
+        foreach ($cards as $card) {
+            if (in_array($card['rank'], $smallCards)) {
+                return 0;
+            }
+        }
+        return 1;
+    }
+
     public function preFlop($rainman, $game_state){
       $me = $this->me($game_state);
       if ($rainman['rank'] >= 1) {
           return 1000000;
-      } elseif ($me["stack"] > 1800) {
+      } elseif ($this->preFlopCardStrength($game_state) == 0) {
           return 0;
       } else {
-          if (rand(0, 100) < 50) {
-              return 0;
-          } else {
-              return $game_state['current_buy_in'];
-          }
+          return $game_state['current_buy_in'];
       }
     }
 
