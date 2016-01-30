@@ -27,6 +27,14 @@ class elsoTest extends PHPUnit_Framework_TestCase {
           },
           {
               "id": 1,
+              "name": "Chuck",
+              "status": "out",
+              "version": "Default random player",
+              "stack": 0,
+              "bet": 0
+          },
+          {
+              "id": 2,
               "name": "Bob",
               "status": "active",
               "version": "Default random player",
@@ -42,14 +50,6 @@ class elsoTest extends PHPUnit_Framework_TestCase {
                       "suit": "spades"
                   }
               ]
-          },
-          {
-              "id": 2,
-              "name": "Chuck",
-              "status": "out",
-              "version": "Default random player",
-              "stack": 0,
-              "bet": 0
           }
       ],
       "community_cards": [
@@ -70,9 +70,9 @@ class elsoTest extends PHPUnit_Framework_TestCase {
 EOL;
 
   public function testApi(){
-
     $result = getRainman(json_decode($this->gameState, true));
-    $this->assertEquals($result, 1);
+    $this->assertEquals($result['rank'], 1);
+    $this->assertEquals($result['value'], 6);
   }
 
   public function testPlayer(){

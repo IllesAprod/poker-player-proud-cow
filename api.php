@@ -15,7 +15,7 @@ function getRainman($game_state){
   }
 
   foreach ($game_state['players'] as $player){
-    if ($player['id'] == 1){
+    if ($player['id'] == 2){
       foreach ($player['hole_cards'] as $node){
         $card['rank'] = $node['rank'];
         $card['suit'] = $node['suit'];
@@ -28,7 +28,7 @@ function getRainman($game_state){
 
   $decoded = json_decode($result, true);
 
-  return $decoded['rank'];
+  return $decoded;
 }
 
  ?>
