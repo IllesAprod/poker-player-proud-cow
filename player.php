@@ -31,7 +31,7 @@ class Player
         if ($game_state['community_cards']) {
             return 1000000;
         } else {
-            if (playerCards[0]['rank'] == $playerCards[1]['rank']) {
+            if ($playerCards[0]['rank'] == $playerCards[1]['rank']) {
                 return 1000000;
             } elseif (mt_rand() < 0.5) {
                 return 0;
