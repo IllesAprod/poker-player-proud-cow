@@ -88,4 +88,16 @@ EOL;
         $this->assertEquals(holdIfCheap($state), 0);
     }
 
+    public function testDoubleBet() {
+        $state = json_decode($this->gameState, true);
+        $state['current_buy_in'] = 40;
+        $this->assertEquals(maxDoubleBet($state), 40);
+    }
+
+    public function testMinBet() {
+        $state = json_decode($this->gameState, true);
+        $state['current_buy_in'] = 0;
+        $this->assertEquals(minBet($state), 20);
+    }
+
 }

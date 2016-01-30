@@ -1,7 +1,7 @@
 <?php
 
-function holdIfCheap($game_state) {
-    if ($game_state['current_buy_in'] > $game_state['small_blind'] * 2) {
+function holdIfCheap($game_state, $multiplier = 1) {
+    if ($game_state['current_buy_in'] > $game_state['small_blind'] * 2 * $multiplier) {
         return 0;
     }
 
@@ -9,9 +9,9 @@ function holdIfCheap($game_state) {
 }
 
 function maxDoubleBet($game_state) {
-    if ($game_state['current_buy_in'] > $game_state['small_blind'] * 4) {
-        return 0;
-    }
+    return holdIfCheap($game_state, 2);
+}
 
-    return (int)$game_state['current_buy_in'];
+function minBet($game_state, $maxMultiplier = 4) {
+    return max($game_state['small_blind'] * 2, holdIfCheap($game_state, $maxMultiplier));
 }

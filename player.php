@@ -65,12 +65,12 @@ class Player {
         return 0;
       }
 
-      if ($rainman['rank'] == 2 && !($rainman['value'] <= 7)){
+      if ($rainman['rank'] == 2 && $rainman['value'] > 7){
         return maxDoubleBet($game_state);
       }
 
       if ($rainman['rank'] == 3 && $rainman['value'] <= 7){
-        return maxDoubleBet($game_state);
+        return minBet($game_state);
       } elseif ($rainman['rank'] >= 3) {
         return 100000;
       }
