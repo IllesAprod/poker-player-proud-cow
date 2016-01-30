@@ -57,7 +57,7 @@ class Player {
                 return $player;
             }
         }
-        $this->log("NEVER HAPPEN.")
+        $this->log("NEVER HAPPEN.");
         return null;
     }
 
