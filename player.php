@@ -1,5 +1,6 @@
 <?php
 require_once 'api.php';
+require_once 'holdit.php';
 
 class Player {
     const VERSION = "Default PHP folding player";
@@ -40,7 +41,11 @@ class Player {
         if (count($game_state['community_cards']) == 0){
           return $this->preFlop($rainman, $game_state);
         } else {
-          return $this->postFlop($rainman, $game_state);
+            if ($val = $this->postFlop($rainman, $game_state)) {
+                return $val;
+            }
+
+            return holdIfCheap($game_state);
         }
 
     }
