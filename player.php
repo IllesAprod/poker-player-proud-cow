@@ -7,11 +7,12 @@ class Player {
 
     public function betRequest($game_state) {
 
-        $rainman = getRainman($game_state);
+
 
         if (count($game_state['community_cards']) == 0){
-          return $this->preFlop($rainman, $game_state);
+          return $this->preFlop($game_state);
         } else {
+          $rainman = getRainman($game_state);
           return $this->postFlop($rainman, $game_state);
         }
 
@@ -190,7 +191,7 @@ class Player {
     //     return 1;
     // }
 
-    public function preFlop($rainman, $game_state){
+    public function preFlop($game_state){
       $me = $this->me($game_state);
       $cards = $me["hole_cards"];
       $strength = $this->cardsStrength($cards[0], $cards[1]);
