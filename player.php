@@ -45,10 +45,15 @@ class Player
     private function playerCards($game_state)
     {
         foreach ($game_state['players'] as $player) {
-          if (array_key_exists("hole_cards", $player)) {
-              return $player["hole_cards"];
-          }
+        //   if (array_key_exists("hole_cards", $player)) {
+        //       return $player["hole_cards"];
+        //   }
+            if ($player["id"] == 2) {
+                file_put_contents("php://stderr", json_encode($player));
+                return $player["hole_cards"];
+            }
         }
+        file_put_contents("php://stderr", "Nincs kartya a kezben");
         return array();
     }
 
