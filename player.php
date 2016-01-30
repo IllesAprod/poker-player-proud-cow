@@ -195,14 +195,10 @@ class Player {
       $cards = $me["hole_cards"];
       $strength = $this->cardsStrength($cards[0], $cards[1]);
 
-      if ($rainman['rank'] >= 1) {
-          return 1000000;
+      if (rand(1, 8) >= $strength) {
+        return $game_state['current_buy_in'];
       } else {
-          if (rand(1, 8) >= $strength) {
-            return $game_state['current_buy_in'];
-          } else {
-            return 0;
-        }
+        return 0;
       }
     }
 
