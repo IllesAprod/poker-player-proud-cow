@@ -247,6 +247,10 @@ class Player {
         return 0;
       }
 
+      if ($rainman['rank'] == 1 && $rainman['value'] == $myMax && ($myMax >= $communityMax)){
+        return maxDoubleBet($game_state);
+      }
+
       if ($rainman['rank'] == 2 && $rainman['value'] > 7){
         return maxDoubleBet($game_state);
       }
