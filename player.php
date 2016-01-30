@@ -6,43 +6,50 @@ class Player
 
     public function betRequest($game_state)
     {
-
-      /*$card = array(
-        "rank" => "",
-        "suit" => "",
-      );
-
       $cards = array();
 
       foreach ($game_state['community_cards'] as $node){
         $card['rank'] = $node['rank'];
         $card['suit'] = $node['suit'];
-        $cards[] = $card;
+        $cards += $card;
       }
 
-      foreach ($game_state['players'] as $player){
-        if ($player['id'] == 2){
-          foreach ($player['hole_cards'] as $node){
-            $card['rank'] = $node['rank'];
-            $card['suit'] = $node['suit'];
-            $cards[] = $card;
+      $playerCards = $this->playerCards($game_state);
+    //   $encoded = http_build_query(array('cards' => $cards));
+    //   $opts = array('http' =>
+    //     array(
+    //       'method' => 'GET',
+    //       'header' => 'Content-type: application/x-www-form-urlencoded',
+    //       'content' => $encoded
+    //     )
+    //   );
+      //
+    //   $context = stream_context_create($opts);
+      //
+    //   $response = file_get_contents('http://rainman.leanpoker.org/rank', false, $opts);
+
+        if ($game_state['community_cards']) {
+            return 1000000;
+        } else {
+            if (playerCards[0]['rank'] == $playerCards[1]['rank']) {
+                return 1000000;
+            } elseif (mt_rand() < 0.5) {
+                return 0;
+            } else {
+                return 1000000;
+            }
+        }
+
+    }
+
+    private function playerCards($game_state)
+    {
+        foreach ($game_state['players'] as $player) {
+          if (array_key_exists("hole_cards", $player)) {
+              return $player["hole_cards"];
           }
         }
-      }
-      $encoded = http_build_query(array('cards' => $cards));
-      $opts = array('http' =>
-        array(
-          'method' => 'GET',
-          'header' => 'Content-type: application/x-www-form-urlencoded',
-          'content' => $encoded
-        )
-      );
-
-      $context = stream_context_create($opts);
-
-      $response = file_get_contents('http://rainman.leanpoker.org/rank', false, $opts);
-*/
-        return 1000000;
+        return array();
     }
 
     public function showdown($game_state)
