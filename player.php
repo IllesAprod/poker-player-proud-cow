@@ -199,7 +199,7 @@ class Player {
       $stack = $me["stack"];
 
       $condition = $smallBlind * 20 > $stack
-        ? rand(1, 8) >= $strength
+        ? $strength != 9 && rand(1, pow(8, 2)) >= pow($strength, 2)
         : rand(1, pow(8, 2)) <= pow(9-$strength, 2);
       if ($condition) {
         $this->log("BUY IN ".json_encode($cards) . " stack: ".$stack." small blind: ".$smallBlind);
