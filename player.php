@@ -66,14 +66,11 @@ class Player {
           return 1000000;
       } elseif ($me["stack"] > 1800) {
           return 0;
-          // } elseif ($game_state['community_cards']) {
-          //     return 1000000;
-          //
       } else {
           if (rand(0, 100) < 50) {
               return 0;
           } else {
-              return 1000000;
+              return $game_state['current_buy_in'];
           }
       }
     }
