@@ -1,4 +1,5 @@
 <?php
+require_once 'api.php';
 
 class Player
 {
@@ -37,7 +38,7 @@ class Player
         // }
 
 
-        if ($playerCards[0]['rank'] == $playerCards[1]['rank']) {
+        if (getRainman($game_state) == 1) {
             return 1000000;
           } elseif ($me["stack"] > 1800) {
              return 0;
@@ -52,6 +53,8 @@ class Player
           }
 
           }
+
+
 
     private function me($game_state)
     {
