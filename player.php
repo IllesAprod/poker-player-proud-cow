@@ -61,6 +61,7 @@ class Player {
     }
 
     public function preFlop($rainman, $game_state){
+      $me = $this->me($game_state);
       if ($rainman['rank'] >= 1) {
           return 1000000;
       } elseif ($me["stack"] > 1800) {
@@ -78,6 +79,7 @@ class Player {
     }
 
     public function postFlop($rainman, $game_state){
+      $me = $this->me($game_state);
       if ($rainman['rank'] >= 1) {
           return 1000000;
       } elseif ($me["stack"] > 1800) {
