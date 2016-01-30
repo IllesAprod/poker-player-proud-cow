@@ -28,7 +28,7 @@ function getRainman($game_state){
 
   $decoded = json_decode($result, true);
 
-  return $decoded['rank'];
+  return $decoded;
 }
 
  ?>

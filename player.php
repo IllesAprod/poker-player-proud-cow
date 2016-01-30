@@ -37,14 +37,15 @@ class Player
         //   return 1000000
         // }
 
-
-        if (getRainman($game_state) == 1) {
+        $rainman = getRainman($game_state);
+        if ($rainman['rank'] >= 1) {
             return 1000000;
           } elseif ($me["stack"] > 1800) {
              return 0;
-          } elseif ($game_state['community_cards']) {
-              return 1000000;
-          } else {
+          // } elseif ($game_state['community_cards']) {
+          //     return 1000000;
+          // 
+        } else {
               if (rand(0, 100) < 50) {
                   return 0;
               } else {
