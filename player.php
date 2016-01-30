@@ -159,7 +159,7 @@ class Player {
       $cr = $this->cardsRank($card1, $card2);
       if ($card1['suit'] == $card2['suit']) {
           if (!isset($suit[$cr])) {
-              $this->log("ERROR missing cards rank $cr");
+              $this->log("SUIT missing cards rank $cr");
               return 9;
           } else {
               $this->log("SUIT: ".$cr." strength: ".$suit[$cr]." ".json_encode([$card1, $card2]));
@@ -167,7 +167,7 @@ class Player {
           }
       } else {
           if (!isset($offsuit[$cr])) {
-              $this->log("ERROR missing cards rank $cr");
+              $this->log("OFFSUIT missing cards rank $cr");
               return 9;
           } else {
               $this->log("OFFSUIT: ".$cr." strength: ".$offsuit[$cr]." ".json_encode([$card1, $card2]));
