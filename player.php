@@ -71,9 +71,13 @@ class Player {
 
       if ($rainman['rank'] == 3 && $rainman['value'] <= 7){
         return minBet($game_state);
-      } elseif ($rainman['rank'] >= 3) {
-        return 100000;
+      } elseif ($rainman['rank'] == 3) {
+        return minBet($game_state, 6);
       }
+
+        if ($rainman['rank'] > 3) {
+            return 100000;
+        }
 
       return holdIfCheap($game_state);
     }
