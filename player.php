@@ -37,14 +37,14 @@ class Player
         // }
 
 
-          if ($me["stack"] > 1800) {
+        if ($playerCards[0]['rank'] == $playerCards[1]['rank']) {
+            return 1000000;
+          } elseif ($me["stack"] > 1800) {
              return 0;
           } elseif ($game_state['community_cards']) {
               return 1000000;
           } else {
-              if ($playerCards[0]['rank'] == $playerCards[1]['rank']) {
-                  return 1000000;
-              } elseif (rand(0, 100) < 50) {
+              if (rand(0, 100) < 50) {
                   return 0;
               } else {
                  return 1000000;
