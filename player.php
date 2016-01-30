@@ -6,35 +6,6 @@ class Player {
     const VERSION = "Default PHP folding player";
 
     public function betRequest($game_state) {
-        $cards = array();
-
-        foreach ($game_state['community_cards'] as $node) {
-            $card['rank'] = $node['rank'];
-            $card['suit'] = $node['suit'];
-            $cards += $card;
-        }
-
-        $me = $this->me($game_state);
-        $playerCards = $me["hole_cards"];
-        //   $encoded = http_build_query(array('cards' => $cards));
-        //   $opts = array('http' =>
-        //     array(
-        //       'method' => 'GET',
-        //       'header' => 'Content-type: application/x-www-form-urlencoded',
-        //       'content' => $encoded
-        //     )
-        //   );
-        //
-        //   $context = stream_context_create($opts);
-        //
-        //   $response = file_get_contents('http://rainman.leanpoker.org/rank', false, $opts);
-        $smallBlind = $game_state['small_blind'];
-
-        // if (smallBlind < 200) {
-        //   return 0
-        // } else {
-        //   return 1000000
-        // }
 
         $rainman = getRainman($game_state);
 
