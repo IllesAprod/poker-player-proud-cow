@@ -36,19 +36,11 @@ class Player {
         // }
 
         $rainman = getRainman($game_state);
-        if ($rainman['rank'] >= 1) {
-            return 1000000;
-        } elseif ($me["stack"] > 1800) {
-            return 0;
-            // } elseif ($game_state['community_cards']) {
-            //     return 1000000;
-            //
+
+        if (count($game_state['community_cards']) == 0){
+          return $this->preFlop($rainman, $game_state);
         } else {
-            if (rand(0, 100) < 50) {
-                return 0;
-            } else {
-                return 1000000;
-            }
+          return $this->postFlop($rainman, $game_state);
         }
 
     }
@@ -66,5 +58,41 @@ class Player {
     }
 
     public function showdown($game_state) {
+    }
+
+    public function preFlop($rainman, $game_state){
+      $me = $this->me($game_state);
+      if ($rainman['rank'] >= 1) {
+          return 1000000;
+      } elseif ($me["stack"] > 1800) {
+          return 0;
+          // } elseif ($game_state['community_cards']) {
+          //     return 1000000;
+          //
+      } else {
+          if (rand(0, 100) < 50) {
+              return 0;
+          } else {
+              return 1000000;
+          }
+      }
+    }
+
+    public function postFlop($rainman, $game_state){
+      $me = $this->me($game_state);
+      if ($rainman['rank'] >= 1) {
+          return 1000000;
+      } elseif ($me["stack"] > 1800) {
+          return 0;
+          // } elseif ($game_state['community_cards']) {
+          //     return 1000000;
+          //
+      } else {
+          if (rand(0, 100) < 50) {
+              return 0;
+          } else {
+              return 1000000;
+          }
+      }
     }
 }
