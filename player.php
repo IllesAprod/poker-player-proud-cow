@@ -202,7 +202,7 @@ class Player {
         ? rand(1, 8) >= $strength
         : rand(1, pow(8, 2)) <= pow(9-$strength, 2);
       if ($condition) {
-        $this->log("BUY IN ".json_encode(cards) . " stack: ".$stack." small blind: ".$smallBlind);
+        $this->log("BUY IN ".json_encode($cards) . " stack: ".$stack." small blind: ".$smallBlind);
         return $game_state['current_buy_in'];
       } else {
         return 0;
