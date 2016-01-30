@@ -3,7 +3,7 @@ require_once 'api.php';
 require_once 'holdit.php';
 
 class Player {
-    const VERSION = "Default PHP folding player";
+    const VERSION = "Poker Master 5000";
 
     public function betRequest($game_state) {
 
