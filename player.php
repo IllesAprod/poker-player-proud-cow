@@ -175,20 +175,20 @@ class Player {
           }
       }
     }
-
-    private function preFlopCardStrength($game_state)
-    {
-        $cards = $this->me($game_state)["hole_cards"];
-        $smallCards = ["2", "3", "4", "5", "6", "7", "8"];
-        foreach ($cards as $card) {
-            if (in_array($card['rank'], $smallCards)) {
-                $this->log("SMALL CARD " .json_encode($cards));
-                return 0;
-            }
-        }
-        $this->log("GOOD CARDS " . json_encode($cards));
-        return 1;
-    }
+    //
+    // private function preFlopCardStrength($game_state)
+    // {
+    //     $cards = $this->me($game_state)["hole_cards"];
+    //     $smallCards = ["2", "3", "4", "5", "6", "7", "8"];
+    //     foreach ($cards as $card) {
+    //         if (in_array($card['rank'], $smallCards)) {
+    //             $this->log("SMALL CARD " .json_encode($cards));
+    //             return 0;
+    //         }
+    //     }
+    //     $this->log("GOOD CARDS " . json_encode($cards));
+    //     return 1;
+    // }
 
     public function preFlop($rainman, $game_state){
       $me = $this->me($game_state);
@@ -198,9 +198,10 @@ class Player {
       $stack = $me["stack"];
 
       $condition = $smallBlind * 20 > $stack
-        ? rand(1, 8*2) >= $strength
+        ? rand(1, 8) >= $strength
         : rand(1, pow(8, 2)) <= pow(9-$strength, 2);
       if ($condition) {
+        $this->log("BUY IN ".json_encode(cards) . " stack: ".$stack." small blind: ".$smallBlind);
         return $game_state['current_buy_in'];
       } else {
         return 0;
