@@ -61,6 +61,27 @@ class Player {
     }
 
     public function postFlop($rainman, $game_state){
+        if ($this->headsUp($game_state)) {
+            if ($rainman['rank'] == 2 && $rainman['value'] > 7) {
+                return holdIfCheap($game_state, 4);
+            } elseif ($rainman['rank'] == 2) {
+                return maxDoubleBet($game_state);
+            }
+
+            if ($rainman['rank'] == 3 && $rainman['value'] <= 7){
+                if ($this->isRiver($game_state)) {
+
+                }
+                return minBet($game_state, 6);
+            }
+
+            if ($rainman['rank'] >= 3) {
+                return 100000;
+            }
+
+            return holdIfCheap($game_state);
+        }
+
       if ($rainman['rank'] == 0){
         return 0;
       }
@@ -82,5 +103,18 @@ class Player {
       return holdIfCheap($game_state);
     }
 
+    private function headsUp($game_state) {
+        $playersIn = 0;
+        foreach ($game_state['players'] as $player) {
+            if ($player['status'] === 'active') {
+                $playersIn += 1;
+            }
+        }
+        return $playersIn === 2;
+    }
+
+    private function isRiver($game_state) {
+        return count($game_state['community_cards']) == 5;
+    }
 
 }
