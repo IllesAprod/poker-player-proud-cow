@@ -1,8 +1,9 @@
 <?php
-require_once    __DIR__ . '/../api.php';
-require_once    __DIR__ . '/../player.php';
+require_once __DIR__ . '/../api.php';
+require_once __DIR__ . '/../player.php';
+
 class elsoTest extends PHPUnit_Framework_TestCase {
-  private $gameState = <<<EOL
+    private $gameState = <<<EOL
   {
       "tournament_id":"550d1d68cd7bd10003000003",
       "game_id":"550da1cb2d909006e90004b1",
@@ -69,18 +70,18 @@ class elsoTest extends PHPUnit_Framework_TestCase {
   }
 EOL;
 
-  public function testApi(){
-    $result = getRainman(json_decode($this->gameState, true));
-    $this->assertEquals($result['rank'], 1);
-    $this->assertEquals($result['value'], 6);
-  }
+    public function testApi() {
+        $result = getRainman(json_decode($this->gameState, true));
+        $this->assertEquals($result['rank'], 1);
+        $this->assertEquals($result['value'], 6);
+    }
 
-  public function testPlayer(){
-    $player = new Player();
-    $result = $player->betRequest(json_decode($this->gameState, true));
-    $this->assertTrue(is_int($result));
-    $this->assertGreaterThanOrEqual(0, $result);
-  }
+    public function testPlayer() {
+        $player = new Player();
+        $result = $player->betRequest(json_decode($this->gameState, true));
+        $this->assertTrue(is_int($result));
+        $this->assertGreaterThanOrEqual(0, $result);
+    }
 }
 
 ?>
