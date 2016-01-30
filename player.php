@@ -203,7 +203,26 @@ class Player {
     }
 
     public function postFlop($rainman, $game_state){
+        $me = $this->me($game_state);
+        $cards = $me["hole_cards"];
+        $myRanks = array();
+        foreach ($cards as $card){
+          $myRanks[] = $this->cardInvert($card['rank']);
+        }
+        $myMax = max($myRanks);
+        $communityCards = array();
+        foreach ($game_state['community_cards'] as $card){
+          $communityCards[] = $this->cardInvert($card['rank']);
+        }
+        $communityMax = max($communityCards);
+
         if ($this->headsUp($game_state)) {
+          if ($rainman['rank'] == 1 && $rainman['value'] == $myMax && ($myMax > $communityMax)){
+            return holdIfCheap($game_state, 3);
+          } elseif ($rainman['rank'] == 1 && $rainman['value'] == $myMax && ($myMax == $communityMax)) {
+            return maxDoubleBet($game_state);
+          }
+
             if ($rainman['rank'] == 2 && $rainman['value'] > 7) {
                 return holdIfCheap($game_state, 4);
             } elseif ($rainman['rank'] == 2) {
@@ -257,6 +276,21 @@ class Player {
 
     private function isRiver($game_state) {
         return count($game_state['community_cards']) == 5;
+    }
+
+    private function cardInvert($card){
+      switch($card){
+        case 'J':
+          return 11;
+        case 'Q':
+          return 12;
+        case 'K':
+          return 13;
+        case 'A':
+          return 14;
+        default:
+          return (int) $card;
+      }
     }
 
 }
