@@ -25,6 +25,7 @@ function getRainman($game_state) {
     }
     $encoded = urlencode(json_encode($cards));
     $result = file_get_contents('http://rainman.leanpoker.org/rank?cards=' . $encoded);
+    file_put_contents("php://stderr", $result . PHP_EOL);
 
     $decoded = json_decode($result, true);
 
