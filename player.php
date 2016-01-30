@@ -194,8 +194,13 @@ class Player {
       $me = $this->me($game_state);
       $cards = $me["hole_cards"];
       $strength = $this->cardsStrength($cards[0], $cards[1]);
+      $smallBlind = $game_state["small_blind"];
+      $stack = $me["stack"];
 
-      if (rand(1, 8) >= $strength) {
+      $condition = $smallBlind * 20 > $stack
+        ? rand(1, 8*2) >= $strength
+        : rand(1, pow(8, 2)) <= pow(9-$strength, 2);
+      if ($condition) {
         return $game_state['current_buy_in'];
       } else {
         return 0;
