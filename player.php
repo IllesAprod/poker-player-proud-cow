@@ -54,15 +54,18 @@ class Player {
     private function me($game_state) {
         foreach ($game_state['players'] as $player) {
             if ($player["id"] == 2) {
-                file_put_contents("php://stderr", json_encode($player));
                 return $player;
             }
         }
-        file_put_contents("php://stderr", "Nincs kartya a kezben");
+        $this->log("NEVER HAPPEN.")
         return null;
     }
 
     public function showdown($game_state) {
+    }
+
+    private function log($message) {
+        file_put_contents("php://stderr", $message);
     }
 
     private function preFlopCardStrength($game_state)
@@ -71,9 +74,11 @@ class Player {
         $smallCards = ["2", "3", "4", "5", "6", "7", "8"];
         foreach ($cards as $card) {
             if (in_array($card['rank'], $smallCards)) {
+                $this->log("SMALL CARD " .json_encode($cards));
                 return 0;
             }
         }
+        $this->log("GOOD CARDS " . json_encode($cards));
         return 1;
     }
 
